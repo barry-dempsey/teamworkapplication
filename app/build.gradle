@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.dempsey.teamworkapp"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation Deps.kotlinStandardLib
+    implementation Deps.appCompat
+    implementation Deps.recyclerView
+    implementation Deps.constraintLayout
+    implementation Deps.rxAndroid
+    implementation Deps.retrofitGsonConverter
+    implementation Deps.dagger
+    kapt Deps.daggerCompiler
+    testImplementation Deps.junit
+    implementation project(':teamwork')
+    implementation Deps.design
+    implementation Deps.mockito
+}

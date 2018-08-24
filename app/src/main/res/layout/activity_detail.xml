@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <TextView
+      android:id="@+id/title_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:textSize="18sp"
+      android:textColor="@color/greyish_brown"
+      android:padding="10dp"
+      android:gravity="center"
+      tools:text="Project Name"
+      />
+
+  <EditText
+      android:id="@+id/project_id"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="24dp"
+      android:layout_marginTop="23dp"
+      android:gravity="start"
+      android:editable="false"
+      android:padding="10dp"
+      app:layout_constraintBottom_toTopOf="@+id/project_name"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/title_view"
+      tools:text="Project Name"
+      />
+
+  <EditText
+      android:id="@+id/project_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="29dp"
+      android:layout_marginTop="24dp"
+      android:gravity="start"
+      android:padding="10dp"
+      app:layout_constraintBottom_toTopOf="@+id/project_description"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/project_id"
+      tools:text="Project Id"
+      />
+
+  <EditText
+      android:id="@+id/project_description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="245dp"
+      android:layout_marginTop="16dp"
+      android:gravity="start"
+      android:padding="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/project_name"
+      tools:text="Project Description"
+      />
+
+  <ProgressBar
+      android:id="@+id/progress_bar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="74dp"
+      android:layout_marginEnd="168dp"
+      android:layout_marginStart="168dp"
+      android:layout_marginTop="43dp"
+      android:indeterminate="true"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toTopOf="@+id/update_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/project_description"
+      tools:visibility="visible"
+      />
+
+  <TextView
+      android:id="@+id/update_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="17dp"
+      android:layout_marginTop="169dp"
+      android:gravity="center"
+      android:padding="15dp"
+      android:textSize="18sp"
+      android:textColor="@color/seashell_white"
+      android:background="@color/cool_blue"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/project_description"
+      android:text="Update"
+      />
+
+</android.support.constraint.ConstraintLayout>
