@@ -10,7 +10,7 @@ public class ProjectTask {
     private String sTATUS;
     @SerializedName("tasklists")
     @Expose
-    private List<Tasklist> tasklists;
+    private List<Task> tasks;
 
     public String getSTATUS() {
         return sTATUS;
@@ -20,11 +20,11 @@ public class ProjectTask {
         this.sTATUS = sTATUS;
     }
 
-    public List<Tasklist> getTasklists() {
-        return tasklists;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setTasklists(List<Tasklist> tasklists) {
-        this.tasklists = tasklists;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

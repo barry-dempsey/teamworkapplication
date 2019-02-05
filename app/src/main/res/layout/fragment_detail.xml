@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
     >
 
   <TextView
@@ -89,6 +90,8 @@
       android:layout_marginTop="169dp"
       android:gravity="center"
       android:padding="15dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
       android:textSize="18sp"
       android:textColor="@color/seashell_white"
       android:background="@color/cool_blue"

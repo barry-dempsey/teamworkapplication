@@ -20,11 +20,18 @@ class TasksPresenter(
         disposable = Teamwork.tasksRequest()
                 .getAllTasksForProject(projectId)
                 .subscribeOn(io)
+                .doOnSubscribe{ view.showLoading() }
                 .observeOn(mainThread)
+                .doOnTerminate { view.hideLoading() }
                 .subscribe(
                         { projectTasks -> handleTasksResponse(projectTasks)},
-                        { error -> view.showError(error)}
+                        { error -> handleErrorIfAny(error) }
                 )
+    }
+
+    private fun handleErrorIfAny(error: Throwable) {
+        view.hideLoading()
+        view.showError(error)
     }
 
     private fun handleTasksResponse(projectTasks: ProjectTask) {

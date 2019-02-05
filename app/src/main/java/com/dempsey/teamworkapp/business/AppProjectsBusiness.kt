@@ -11,7 +11,7 @@ class AppProjectsBusiness : ProjectsBusiness {
             Teamwork.projectRequest()
                     .newGetAllProjectsRequest()
 
-    override fun filterByDueDate(projects: List<Project>?): List<Project> {
+    override fun filterByDueDate(projects: List<Project>): List<Project> {
         return ArrayList(projects)
                 .sortedWith(compareByDescending<Project> { it.endDate })
     }

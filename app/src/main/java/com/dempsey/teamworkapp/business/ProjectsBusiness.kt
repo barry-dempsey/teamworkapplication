@@ -8,6 +8,6 @@ interface ProjectsBusiness {
 
     fun getProjects(): Observable<Projects>
 
-    fun filterByDueDate(projects: List<Project>?): List<Project>
+    fun filterByDueDate(projects: List<Project>): List<Project>
 
 }

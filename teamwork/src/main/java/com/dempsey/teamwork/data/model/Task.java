@@ -3,7 +3,7 @@ package com.dempsey.teamwork.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tasklist {
+public class Task {
     @SerializedName("name")
     @Expose
     private String name;

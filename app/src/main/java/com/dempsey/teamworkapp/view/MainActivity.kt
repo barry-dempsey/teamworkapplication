@@ -2,6 +2,7 @@ package com.dempsey.teamworkapp.view
 
 import android.os.Bundle
 import android.view.View
+import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamworkapp.presenter.login.LoginContract
 import com.dempsey.teamworkapp.R.layout
 import com.dempsey.teamworkapp.R.string
@@ -18,16 +19,11 @@ class MainActivity : LoginContract.View,
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
-
     doLogin()
   }
 
   private fun doLogin() {
     presenter.loginUser(getString(string.api_key))
-  }
-
-  override fun startTasksFragment(projectId: String) {
-    replaceFragment(TasksViewFragment.newInstance(projectId))
   }
 
   override fun instantiatePresenter(): LoginPresenter {
@@ -50,6 +46,14 @@ class MainActivity : LoginContract.View,
     addFragment(ProjectsFragment.newInstance(this))
   }
 
+  override fun startTasksFragment(projectId: String) {
+    replaceFragment(TasksViewFragment.newInstance(projectId, this))
+  }
+
+  override fun startDetailFragment(project: Project) {
+    replaceFragment(ProjectDetailFragment.newInstance(project, this))
+  }
+
   override fun showError(error: Int) {
     MessageBanner(this).showBanner(error, MessageType.ERROR)
   }
@@ -57,5 +61,13 @@ class MainActivity : LoginContract.View,
   override fun onDestroy() {
     presenter.onViewDestroyed()
     super.onDestroy()
+  }
+
+  override fun onBackPressed() {
+    if (supportFragmentManager.backStackEntryCount == 0) {
+      finish()
+    } else {
+      super.onBackPressed()
+    }
   }
 }

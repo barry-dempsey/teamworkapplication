@@ -3,7 +3,6 @@ package com.dempsey.teamworkapp.view
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
@@ -80,7 +79,7 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sort -> {
-                presenter.sortByDueData(projectList)
+                presenter.sortByDueData(projectList!!)
                 return true
             }
             R.id.refresh -> {
@@ -97,7 +96,12 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
 
     inner class ProjectSelector : ProjectsAdapter.ProjectSelected {
 
-        override fun onProjectSelected(project: Project) {
+        override fun onProjectSelectedForDetail(project: Project): Boolean {
+            delegate.startDetailFragment(project = project)
+            return false
+        }
+
+        override fun onProjectSelectedForTasks(project: Project) {
             delegate.startTasksFragment(projectId = project.id)
         }
     }

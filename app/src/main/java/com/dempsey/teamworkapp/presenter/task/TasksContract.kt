@@ -6,6 +6,10 @@ interface TasksContract {
 
     interface View {
 
+        fun showLoading()
+
+        fun hideLoading()
+
         fun displayProjectTasks(tasks: ProjectTask)
 
         fun showError(error: Throwable)

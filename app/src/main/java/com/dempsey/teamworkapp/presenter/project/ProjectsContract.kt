@@ -2,6 +2,7 @@ package com.dempsey.teamworkapp.presenter.project
 
 import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamwork.data.model.Projects
+import com.dempsey.teamworkapp.base.BaseDelegate
 
 interface ProjectsContract {
 
@@ -25,15 +26,15 @@ interface ProjectsContract {
 
         fun getProjects()
 
-        fun sortByDueData(projects: List<Project>?)
+        fun sortByDueData(projects: List<Project>)
 
     }
 
-    interface Delegate {
+    interface Delegate: BaseDelegate {
 
         fun startTasksFragment(projectId: String)
 
-        fun updateLoading(show: Boolean)
+        fun startDetailFragment(project: Project)
 
     }
 

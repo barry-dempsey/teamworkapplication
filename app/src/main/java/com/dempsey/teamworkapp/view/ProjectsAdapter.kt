@@ -25,13 +25,10 @@ class ProjectsAdapter(
         return ProjectViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return projects.size
-    }
+    override fun getItemCount() = projects.size
 
-    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) =
         holder.bind(projects[position])
-    }
 
     inner class ProjectViewHolder(view: View) : ViewHolder(view) {
 
@@ -41,7 +38,8 @@ class ProjectsAdapter(
         private var projectDescriptionTv = view.findViewById(id.project_description) as TextView
 
         fun bind(project: Project) {
-            rootView.setOnClickListener { listener.onProjectSelected(project) }
+            rootView.setOnClickListener { listener.onProjectSelectedForTasks(project) }
+            rootView.setOnLongClickListener{ listener.onProjectSelectedForDetail(project) }
             projectIdTv.text = project.id
             projectNameTv.text = project.name
             projectDescriptionTv.text = project.description
@@ -51,7 +49,9 @@ class ProjectsAdapter(
 
     interface ProjectSelected {
 
-        fun onProjectSelected(project: Project)
+        fun onProjectSelectedForTasks(project: Project)
+
+        fun onProjectSelectedForDetail(project: Project) : Boolean
 
     }
 }

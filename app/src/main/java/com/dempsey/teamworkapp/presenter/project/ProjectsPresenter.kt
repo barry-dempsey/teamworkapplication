@@ -37,7 +37,7 @@ class ProjectsPresenter(
         disposable.dispose()
     }
 
-    override fun sortByDueData(projects: List<Project>?) {
+    override fun sortByDueData(projects: List<Project>) {
         view.reloadData(business.filterByDueDate(projects))
     }
 
@@ -49,6 +49,5 @@ class ProjectsPresenter(
                         Schedulers.io(),
                         AndroidSchedulers.mainThread(),
                         view)
-
     }
 }

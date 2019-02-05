@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.dempsey.teamwork.data.model.Tasklist
+import com.dempsey.teamwork.data.model.Task
 import com.dempsey.teamworkapp.R
 
 class TasksAdapter(
-        private val tasks: List<Tasklist>
+        private val tasks: List<Task>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,7 +27,7 @@ class TasksAdapter(
         private val titleView = itemView.findViewById<TextView>(R.id.task_header)
         private val descriptionView = itemView.findViewById<TextView>(R.id.task_description)
 
-        fun onBind(task: Tasklist) {
+        fun onBind(task: Task) {
             titleView.text = task.name
             descriptionView.text = task.description
         }
