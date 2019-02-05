@@ -10,14 +10,14 @@ import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamwork.data.model.Projects
 import com.dempsey.teamworkapp.R.layout
 import com.dempsey.teamworkapp.base.BaseActivity
-import com.dempsey.teamworkapp.presenter.ProjectsPresenter
+import com.dempsey.teamworkapp.presenter.project.ProjectsPresenter
 import kotlinx.android.synthetic.main.activity_main.recycler_view
 import android.view.Menu
 import android.view.MenuItem
-import com.dempsey.mytaxiapplication.utils.MessageBanner
-import com.dempsey.mytaxiapplication.utils.MessageType.SUCCESS
 import com.dempsey.teamworkapp.R
-import com.dempsey.teamworkapp.presenter.ProjectsContract
+import com.dempsey.teamworkapp.presenter.project.ProjectsContract
+import com.dempsey.teamworkapp.utils.MessageBanner
+import com.dempsey.teamworkapp.utils.MessageType
 import com.dempsey.teamworkapp.view.ProjectsAdapter.ProjectSelected
 
 class ProjectsActivity:
@@ -35,11 +35,18 @@ class ProjectsActivity:
   }
 
   private fun initViews() {
-    recycler_view.visibility = View.VISIBLE
+    updateRecyclerVisivility(show = true)
     val projects = intent.getSerializableExtra(PROJECTS_EXTRA) as Projects
     projectList = projects.projectList
 
     initAdapter(projectList)
+  }
+
+  private fun updateRecyclerVisivility(show: Boolean) {
+    when (show) {
+      true -> recycler_view.visibility = View.VISIBLE
+      false -> recycler_view.visibility = View.GONE
+    }
   }
 
   private fun initAdapter(projectList: List<Project>) {
@@ -54,19 +61,22 @@ class ProjectsActivity:
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    val inflater = menuInflater
-    inflater.inflate(R.menu.menu_main, menu)
+    menuInflater.inflate(R.menu.menu_main, menu)
     return true
   }
 
   override fun showLoadingMessage() {
-    MessageBanner(this).showBanner("Loading Projects", SUCCESS)
+    MessageBanner(this).showBanner(getString(R.string.loading_projects), MessageType.SUCCESS)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
       R.id.sort -> {
         presenter.sortByDueData(projectList)
+        return true
+      }
+      R.id.refresh -> {
+        presenter.onViewCreated()
         return true
       }
       else -> return super.onOptionsItemSelected(item)
@@ -91,7 +101,8 @@ class ProjectsActivity:
   inner class ProjectSelector: ProjectSelected {
 
     override fun onProjectSelected(project: Project) {
-      startActivity(ProjectDetailActivity.newInstance(this@ProjectsActivity, project))
+      updateRecyclerVisivility(show = false)
+      addFragment(TasksViewFragment.newInstance(projectId = project.id))
     }
 
   }

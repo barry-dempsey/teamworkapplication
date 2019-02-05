@@ -1,20 +1,19 @@
-package com.dempsey.teamworkapp.presenter
+package com.dempsey.teamworkapp.presenter.login
 
 import com.dempsey.teamwork.Teamwork
 import com.dempsey.teamworkapp.R.string
 import com.dempsey.teamworkapp.base.BasePresenter
-import com.dempsey.teamworkapp.presenter.LoginContract.ActionListener
-import com.dempsey.teamworkapp.presenter.LoginContract.View
+import com.dempsey.teamworkapp.presenter.LoginContract
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class LoginPresenter(
-    private val view: View,
-    private val schedulers: Scheduler,
-    private val androidSchedulers: Scheduler
-): ActionListener, BasePresenter() {
+        private val view: LoginContract.View,
+        private val schedulers: Scheduler,
+        private val androidSchedulers: Scheduler
+): LoginContract.ActionListener, BasePresenter() {
 
   private var disposable: Disposable? = null
 
@@ -62,12 +61,11 @@ class LoginPresenter(
 
   companion object {
 
-    fun newInstance(view: View): LoginPresenter =
-        LoginPresenter(
-            view,
-            Schedulers.io(),
-            AndroidSchedulers.mainThread())
+    fun newInstance(view: LoginContract.View): LoginPresenter =
+            LoginPresenter(
+                    view,
+                    Schedulers.io(),
+                    AndroidSchedulers.mainThread())
 
   }
-
 }

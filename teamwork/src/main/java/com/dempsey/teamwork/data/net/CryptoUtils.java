@@ -8,10 +8,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- * Created by niko-yuwono on 17/01/08.
- */
-
 class CryptoUtils {
 
     private static final String KEY_PREFERENCE_KEY = "KEY_PREFERENCE_KEY";
@@ -37,7 +33,7 @@ class CryptoUtils {
                 .putString(KEY_PREFERENCE_KEY, randomKey)
                 .putString(IV_PREFERENCE_KEY, initVector)
                 .putString(CREDENTIAL_PREFERENCE_KEY, encryptedCredential)
-                .commit();
+                .apply();
     }
 
     static String getSavedCredential() {

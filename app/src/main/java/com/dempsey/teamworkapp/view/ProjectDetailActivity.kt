@@ -4,16 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.dempsey.mytaxiapplication.utils.MessageBanner
-import com.dempsey.mytaxiapplication.utils.MessageType.ERROR
-import com.dempsey.mytaxiapplication.utils.MessageType.SUCCESS
-import com.dempsey.teamwork.data.model.Message
 import com.dempsey.teamwork.data.model.Project
-import com.dempsey.teamworkapp.presenter.ProjectDetailPresenter
+import com.dempsey.teamworkapp.presenter.project.ProjectDetailPresenter
 import com.dempsey.teamworkapp.R.layout
 import com.dempsey.teamworkapp.base.BaseActivity
 import com.dempsey.teamworkapp.base.BasePresenter
-import com.dempsey.teamworkapp.presenter.ProjectDetailContract
+import com.dempsey.teamworkapp.presenter.project.ProjectDetailContract
+import com.dempsey.teamworkapp.utils.MessageBanner
+import com.dempsey.teamworkapp.utils.MessageType
 import kotlinx.android.synthetic.main.activity_detail.progress_bar
 import kotlinx.android.synthetic.main.activity_detail.project_description
 import kotlinx.android.synthetic.main.activity_detail.project_id
@@ -58,11 +56,11 @@ class ProjectDetailActivity:
   }
 
   override fun showSuccess() {
-    MessageBanner(this).showBanner("Success", SUCCESS)
+    MessageBanner(this).showBanner("Success", MessageType.SUCCESS)
   }
 
   override fun showError() {
-    MessageBanner(this).showBanner("Error", ERROR)
+    MessageBanner(this).showBanner("Error", MessageType.ERROR)
   }
 
   companion object {

@@ -112,7 +112,7 @@ public class ApiClient {
             }
             this.apiClient = apiClient;
             this.urlBuilder = new HttpUrl.Builder()
-                    .scheme("https")
+                    .scheme("http")
                     .host(host)
                     .encodedPath(path);
             addDefaultHeaders();
@@ -315,10 +315,10 @@ public class ApiClient {
 
     }
 
-    //private static HttpLoggingInterceptor provideInterceptor() {
-    //    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    //    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-    //    return interceptor;
-    //}
+    private static HttpLoggingInterceptor provideInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
+    }
 
 }

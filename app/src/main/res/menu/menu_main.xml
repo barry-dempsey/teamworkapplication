@@ -3,4 +3,8 @@
   <item android:id="@+id/sort"
       android:icon="@drawable/ic_launcher_foreground"
       android:title="@string/sort_label" />
+
+  <item android:id="@+id/refresh"
+      android:icon="@drawable/ic_launcher_foreground"
+      android:title="@string/refresh_label" />
 </menu>

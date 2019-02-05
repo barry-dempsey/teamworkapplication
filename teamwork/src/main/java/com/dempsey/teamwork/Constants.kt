@@ -1,3 +1,3 @@
 package com.dempsey.teamwork
 
-const val AUTH_HOST = "authenticate.virtumediadublin.teamwork.com"
+const val AUTH_HOST = "authenticate.dempseybarry.teamwork.com"

@@ -1,4 +1,4 @@
-package com.dempsey.teamworkapp.presenter
+package com.dempsey.teamworkapp.presenter.project
 
 import com.dempsey.teamwork.Teamwork
 import com.dempsey.teamwork.data.model.Project
@@ -22,13 +22,13 @@ class ProjectDetailPresenter(
         .subscribe(
             { _ -> view.showSuccess()},
             { _ -> view.showError() }
-        )
+        ).dispose()
   }
 
   companion object {
 
     fun newInstance(view: ProjectDetailContract.View): ProjectDetailPresenter =
-        ProjectDetailPresenter(view)
+            ProjectDetailPresenter(view)
 
   }
 

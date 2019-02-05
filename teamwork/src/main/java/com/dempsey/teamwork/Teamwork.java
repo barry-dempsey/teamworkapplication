@@ -5,13 +5,19 @@ import android.content.SharedPreferences;
 import com.dempsey.teamwork.data.net.ApiClient;
 import com.dempsey.teamwork.service.account.AccountRequest;
 import com.dempsey.teamwork.service.project.ProjectRequest;
+import com.dempsey.teamwork.service.tasks.TasksRequest;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
+import okhttp3.CertificatePinner;
 import okhttp3.OkHttpClient;
 
 public final class Teamwork {
     private static final String PREFERENCE_NAME = "com.nikoyuwono.teamwork.SDK_STORE";
+    private static final String SHA_256_PREFIX = "sha256/";
+    private static final String SSL_FINGERPRINT = "QSiElEKKeAgIBOJuy6Lg4dDUNqWNGCb4sQTHFSKd0co=";
+    private static final String SSL_API_HOST = "*.teamwork.com";
 
     private static ApiClient apiClient;
     private static Context applicationContext;
@@ -42,6 +48,12 @@ public final class Teamwork {
                 .build();
     }
 
+    private static CertificatePinner providePinner() {
+        return new CertificatePinner
+                .Builder()
+                .add(SSL_API_HOST, SHA_256_PREFIX + SSL_FINGERPRINT).build();
+    }
+
     public static Context getApplicationContext() {
         return applicationContext;
     }
@@ -64,5 +76,11 @@ public final class Teamwork {
         final ProjectRequest projectRequest = ProjectRequest.getInstance();
         projectRequest.init(apiClient);
         return projectRequest;
+    }
+
+    public static TasksRequest tasksRequest() {
+        final TasksRequest tasksRequest = TasksRequest.getInstance();
+        tasksRequest.init(apiClient);
+        return tasksRequest;
     }
 }

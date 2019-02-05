@@ -1,4 +1,4 @@
-package com.dempsey.mytaxiapplication.utils
+package com.dempsey.teamworkapp.utils
 
 enum class MessageType {
 

@@ -1,4 +1,4 @@
-package com.dempsey.mytaxiapplication.utils
+package com.dempsey.teamworkapp.utils
 
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity

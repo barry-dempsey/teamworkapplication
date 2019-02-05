@@ -1,4 +1,4 @@
-package com.dempsey.teamworkapp.presenter
+package com.dempsey.teamworkapp.presenter.project
 
 import com.dempsey.teamwork.data.model.Project
 
