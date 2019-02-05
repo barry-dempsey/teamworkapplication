@@ -1,12 +1,12 @@
 package com.dempsey.teamworkapp.presenter.task
 
-import com.dempsey.teamwork.data.model.Task
+import com.dempsey.teamwork.data.model.ProjectTask
 
 interface TasksContract {
 
     interface View {
 
-        fun displayProjectTasks(tasks: List<Task>)
+        fun displayProjectTasks(tasks: ProjectTask)
 
         fun showError(error: Throwable)
 

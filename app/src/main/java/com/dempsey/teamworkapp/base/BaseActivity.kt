@@ -28,6 +28,10 @@ abstract class BaseActivity<P: BasePresenter>: AppCompatActivity() {
     supportFragmentManager.inTransaction { add(R.id.fragment_content, fragment) }
   }
 
+  protected fun replaceFragment(fragment: Fragment) {
+    supportFragmentManager.inTransaction { replace(R.id.fragment_content, fragment) }
+  }
+
   abstract fun instantiatePresenter(): P
 
   private fun connectivityManager() = getSystemService(

@@ -1,6 +1,7 @@
 package com.dempsey.teamworkapp.presenter.task
 
 import com.dempsey.teamwork.Teamwork
+import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamworkapp.base.BasePresenter
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,9 +22,13 @@ class TasksPresenter(
                 .subscribeOn(io)
                 .observeOn(mainThread)
                 .subscribe(
-                        { projectTasks -> view.displayProjectTasks(projectTasks.taskList)},
+                        { projectTasks -> handleTasksResponse(projectTasks)},
                         { error -> view.showError(error)}
                 )
+    }
+
+    private fun handleTasksResponse(projectTasks: ProjectTask) {
+        view.displayProjectTasks(projectTasks)
     }
 
     override fun onViewCreated() {}

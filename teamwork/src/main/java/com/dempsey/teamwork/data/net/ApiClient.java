@@ -7,12 +7,11 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -54,6 +53,7 @@ public class ApiClient {
 
         private OkHttpClient okHttpClient;
         private HttpUrl baseUrl;
+        private Interceptor interceptor;
 
         public ApiClient build() {
             if (okHttpClient == null)  {
@@ -70,6 +70,11 @@ public class ApiClient {
 
         public Builder baseUrl(HttpUrl baseUrl) {
             this.baseUrl = baseUrl;
+            return this;
+        }
+
+        public Builder interceptor(Interceptor interceptor) {
+            this.interceptor = interceptor;
             return this;
         }
     }

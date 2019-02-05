@@ -1,21 +1,40 @@
 package com.dempsey.teamworkapp.presenter.project
 
 import com.dempsey.teamwork.data.model.Project
+import com.dempsey.teamwork.data.model.Projects
 
 interface ProjectsContract {
 
-  interface View {
+    interface View {
 
-    fun showLoadingMessage()
+        fun showProgress()
 
-    fun reloadData(projects: List<Project>)
+        fun hideProgress()
 
-  }
+        fun showLoadingMessage()
 
-  interface ActionListener {
+        fun showProjectsForUser(projects: Projects)
 
-    fun sortByDueData(projects: List<Project>)
+        fun handleError(error: Throwable)
 
-  }
+        fun reloadData(projects: List<Project>)
+
+    }
+
+    interface ActionListener {
+
+        fun getProjects()
+
+        fun sortByDueData(projects: List<Project>?)
+
+    }
+
+    interface Delegate {
+
+        fun startTasksFragment(projectId: String)
+
+        fun updateLoading(show: Boolean)
+
+    }
 
 }

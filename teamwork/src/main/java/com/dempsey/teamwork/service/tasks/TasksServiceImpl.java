@@ -1,21 +1,14 @@
 package com.dempsey.teamwork.service.tasks;
 
-import com.dempsey.teamwork.data.model.Project;
 import com.dempsey.teamwork.data.model.ProjectTask;
 import com.dempsey.teamwork.data.net.ApiClient;
 import com.dempsey.teamwork.service.Util;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
 public class TasksServiceImpl implements TasksService {
 
-    private static final Type TASK_LIST_TYPE = new TypeToken<ArrayList<Project>>() {}.getType();
     private static final String PROJECTS_WITH_ID_URL_PATH = "/projects/%s.json";
     private final ApiClient apiClient;
     private final Gson gson;
@@ -30,7 +23,7 @@ public class TasksServiceImpl implements TasksService {
         return apiClient.withPath(projectsUrlPath(projectId))
                 .get()
                 .map(Util::getContent)
-                .map(content -> gson.fromJson(content, TASK_LIST_TYPE));
+                .map(content -> gson.fromJson(content, ProjectTask.class));
     }
 
     private String projectsUrlPath(@NonNull String projectId) {

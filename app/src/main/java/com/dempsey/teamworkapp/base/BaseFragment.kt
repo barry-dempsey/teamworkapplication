@@ -10,11 +10,18 @@ abstract class BaseFragment<P: BasePresenter> : Fragment() {
 
     abstract fun layoutId(): Int
 
+    abstract fun setUpUi()
+
     protected lateinit var presenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = instantiatePresenter()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpUi()
     }
 
     abstract fun instantiatePresenter(): P

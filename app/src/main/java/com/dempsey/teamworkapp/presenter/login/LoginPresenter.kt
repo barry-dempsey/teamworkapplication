@@ -3,7 +3,6 @@ package com.dempsey.teamworkapp.presenter.login
 import com.dempsey.teamwork.Teamwork
 import com.dempsey.teamworkapp.R.string
 import com.dempsey.teamworkapp.base.BasePresenter
-import com.dempsey.teamworkapp.presenter.LoginContract
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,24 +20,11 @@ class LoginPresenter(
     disposable = Teamwork.accountRequest()
         .newAuthenticateRequest(apiKey)
         .doOnSubscribe { view.showProgress() }
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(schedulers)
+        .observeOn(androidSchedulers)
         .doOnTerminate { view.hideProgress() }
         .subscribe(
             { _ ->  view.showSuccess()},
-            { error -> handleError(error)}
-        )
-  }
-
-  override fun getProjects() {
-    disposable = Teamwork.projectRequest()
-        .newGetAllProjectsRequest()
-        .subscribeOn(schedulers)
-        .observeOn(androidSchedulers)
-        .doOnSubscribe { view.showProgress() }
-        .doOnTerminate { view.hideProgress() }
-        .subscribe(
-            { projects ->  view.showProjectsForUser(projects) },
             { error -> handleError(error)}
         )
   }

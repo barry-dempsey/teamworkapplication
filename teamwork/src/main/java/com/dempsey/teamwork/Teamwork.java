@@ -11,7 +11,9 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.CertificatePinner;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public final class Teamwork {
     private static final String PREFERENCE_NAME = "com.nikoyuwono.teamwork.SDK_STORE";
@@ -32,6 +34,7 @@ public final class Teamwork {
         final OkHttpClient okHttpClient = createOkHttpClient(cache);
         apiClient = new ApiClient.Builder()
                 .okHttpClient(okHttpClient)
+                .interceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
     }
 

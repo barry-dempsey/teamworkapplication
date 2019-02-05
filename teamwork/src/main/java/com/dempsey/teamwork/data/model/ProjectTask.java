@@ -1,28 +1,30 @@
 package com.dempsey.teamwork.data.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class ProjectTask {
-    @SerializedName("status")
-    private String status;
-    @SerializedName("task_list")
-    private List<Task> taskList;
+    @SerializedName("STATUS")
+    @Expose
+    private String sTATUS;
+    @SerializedName("tasklists")
+    @Expose
+    private List<Tasklist> tasklists;
 
-    public String getStatus() {
-        return status;
+    public String getSTATUS() {
+        return sTATUS;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSTATUS(String sTATUS) {
+        this.sTATUS = sTATUS;
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public List<Tasklist> getTasklists() {
+        return tasklists;
     }
 
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public void setTasklists(List<Tasklist> tasklists) {
+        this.tasklists = tasklists;
     }
 }

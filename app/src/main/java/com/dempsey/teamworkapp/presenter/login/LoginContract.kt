@@ -1,6 +1,4 @@
-package com.dempsey.teamworkapp.presenter
-
-import com.dempsey.teamwork.data.model.Projects
+package com.dempsey.teamworkapp.presenter.login
 
 interface LoginContract {
 
@@ -14,15 +12,11 @@ interface LoginContract {
 
     fun showError(error: Int)
 
-    fun showProjectsForUser(projects: Projects)
-
   }
 
   interface ActionListener {
 
     fun loginUser(apiKey: String)
-
-    fun getProjects()
 
   }
 

@@ -7,29 +7,29 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ProjectDetailPresenter(
-    private val view: ProjectDetailContract.View
-): BasePresenter(), ProjectDetailContract.ActionListener {
+        private val view: ProjectDetailContract.View
+) : BasePresenter(), ProjectDetailContract.ActionListener {
 
-  override fun onViewCreated() {}
+    override fun onViewCreated() {}
 
-  override fun onViewDestroyed() {}
+    override fun onViewDestroyed() {}
 
-  override fun updateProjectDetails(project: Project) {
-    Teamwork.projectRequest()
-        .updateProject(project)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(
-            { _ -> view.showSuccess()},
-            { _ -> view.showError() }
-        ).dispose()
-  }
+    override fun updateProjectDetails(project: Project) {
+        Teamwork.projectRequest()
+                .updateProject(project)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { view.showSuccess() },
+                        { view.showError() }
+                ).dispose()
+    }
 
-  companion object {
+    companion object {
 
-    fun newInstance(view: ProjectDetailContract.View): ProjectDetailPresenter =
-            ProjectDetailPresenter(view)
-
-  }
+        @JvmStatic
+        fun newInstance(view: ProjectDetailContract.View) =
+                ProjectDetailPresenter(view)
+    }
 
 }
