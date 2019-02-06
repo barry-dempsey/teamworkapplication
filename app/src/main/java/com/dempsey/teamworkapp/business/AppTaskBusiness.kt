@@ -1,20 +1,23 @@
 package com.dempsey.teamworkapp.business
 
-import com.dempsey.teamwork.Teamwork
 import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamwork.data.model.TodoList
+import com.dempsey.teamworkapp.dao.AppRemoteDao
+import com.dempsey.teamworkapp.dao.RemoteDao
 import io.reactivex.Observable
 
-class AppTaskBusiness : TaskBusiness {
+class AppTaskBusiness(
+        private val remoteDao: RemoteDao
+) : TaskBusiness {
 
     override fun getAllTasksForProject(projectId: String): Observable<ProjectTask> =
-            Teamwork.tasksRequest().getAllTasksForProject(projectId)
+            remoteDao.getTasksForProject(projectId)
 
     override fun getTodoListForTask(taskId: String): Observable<TodoList> =
-            Teamwork.tasksRequest().getTodoListForTask(taskId)
+            remoteDao.getTodoListForTasks(taskId)
 
     companion object {
         @JvmStatic
-        fun newInstance() = AppTaskBusiness()
+        fun newInstance() = AppTaskBusiness(AppRemoteDao.newInstance())
     }
 }

@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -31,8 +30,6 @@ class LoginPresenterTest {
 
   @Mock lateinit var apiClient: ApiClient
 
-  @Mock lateinit var okHttpClient: OkHttpClient
-
   @Mock lateinit var okHttpClientBuilder: OkHttpClient.Builder
 
   @Before
@@ -44,19 +41,14 @@ class LoginPresenterTest {
 
   @Test
   fun `log in the user`() {
-    Mockito.`when`(okHttpClientBuilder.build()).thenReturn(OkHttpClient())
-    Mockito.`when`(apiClient.withPath(anyString())).thenReturn(mockApiClient().withPath("thePath"))
+    val client = OkHttpClient.Builder().build()
+    Mockito.`when`(okHttpClientBuilder.build()).thenReturn(client)
     Mockito.doReturn(Observable.just(mockAccount())).`when`(accountRequest).newAuthenticateRequest("apiKey")
-    presenter.loginUser("api")
+    presenter.loginUser("apiKey")
     testScheduler.triggerActions()
-    Mockito.verify(view).showProgress()
+    Mockito.verify(view).showLoading()
     Mockito.verify(view).showSuccess()
-    Mockito.verify(view).hideProgress()
-  }
-
-  @Test
-  fun getProjects() {
-
+    Mockito.verify(view).hideLoading()
   }
 
   private fun mockAccount() : Account =
