@@ -1,6 +1,7 @@
 package com.dempsey.teamwork.service.tasks;
 
 import com.dempsey.teamwork.data.model.ProjectTask;
+import com.dempsey.teamwork.data.model.TodoList;
 import com.dempsey.teamwork.data.net.ApiClient;
 import com.dempsey.teamwork.service.BaseRequest;
 import com.google.gson.GsonBuilder;
@@ -33,5 +34,9 @@ public class TasksRequest extends BaseRequest<TasksService> {
 
     public Observable<ProjectTask> getAllTasksForProject(final String projectId) {
         return service.getTasksForProject(projectId);
+    }
+
+    public Observable<TodoList> getTodoListForTask(final String id) {
+        return service.getTodoListForTask(id);
     }
 }

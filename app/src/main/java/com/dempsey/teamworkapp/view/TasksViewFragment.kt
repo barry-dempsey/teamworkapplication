@@ -1,12 +1,12 @@
 package com.dempsey.teamworkapp.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.dempsey.teamwork.data.model.ProjectTask
+import com.dempsey.teamwork.data.model.Task
+import com.dempsey.teamwork.data.model.TodoList
 import com.dempsey.teamworkapp.R
-import com.dempsey.teamworkapp.base.BaseDelegate
 import com.dempsey.teamworkapp.base.BaseFragment
 import com.dempsey.teamworkapp.presenter.task.TasksContract
 import com.dempsey.teamworkapp.presenter.task.TasksPresenter
@@ -18,7 +18,7 @@ private const val PROJECT_ID_BUNDLE = "projectIdBundle"
 
 class TasksViewFragment : BaseFragment<TasksPresenter>(), TasksContract.View {
 
-    private var delegate: BaseDelegate? = null
+    private var delegate: TasksContract.Delegate? = null
 
     override fun layoutId() = R.layout.fragment_task_layout
 
@@ -29,30 +29,35 @@ class TasksViewFragment : BaseFragment<TasksPresenter>(), TasksContract.View {
         presenter.getTasksForProject(arguments!![PROJECT_ID_BUNDLE] as String)
     }
 
-    override fun setUpUi() {
-    }
+    override fun setUpUi() {}
 
     override fun displayProjectTasks(tasks: ProjectTask) {
-        val taskAdapter = TasksAdapter(tasks.tasks)
+        val taskAdapter = TasksAdapter(tasks.tasks, TaskSelector())
         tasks_recycler_view.adapter = taskAdapter
         tasks_recycler_view.layoutManager = LinearLayoutManager(context!!)
     }
 
+    override fun displayTodolist(todoList: TodoList) {
+        delegate?.startTodoListFragment(todoList)
+    }
+
     override fun showError(error: Throwable) {
-        MessageBanner(context!! as AppCompatActivity).showBanner(error.message!!, MessageType.ERROR)
+        MessageBanner(context!! as MainActivity).showBanner(error.message!!, MessageType.ERROR)
     }
 
-    override fun showLoading() {
-        delegate?.updateLoading(show = true)
-    }
+    inner class TaskSelector : TasksAdapter.TaskSelected {
 
-    override fun hideLoading() {
-        delegate?.updateLoading(show = false)
+        override fun onTaskSelected(task: Task) {
+            presenter.getTodoListForTask(taskId = task.id)
+        }
     }
 
     companion object {
 
-        fun newInstance(projectId: String, delegate: BaseDelegate): TasksViewFragment {
+        fun newInstance(
+                projectId: String,
+                delegate: TasksContract.Delegate
+        ): TasksViewFragment {
             val bundle = Bundle().apply {
                 putString(PROJECT_ID_BUNDLE, projectId)
             }
@@ -62,4 +67,6 @@ class TasksViewFragment : BaseFragment<TasksPresenter>(), TasksContract.View {
             }
         }
     }
+
+
 }

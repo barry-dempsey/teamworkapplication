@@ -1,20 +1,24 @@
 package com.dempsey.teamworkapp.view
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import com.dempsey.teamwork.data.model.Project
+import com.dempsey.teamwork.data.model.TodoList
+import com.dempsey.teamworkapp.R
 import com.dempsey.teamworkapp.presenter.login.LoginContract
 import com.dempsey.teamworkapp.R.layout
 import com.dempsey.teamworkapp.R.string
 import com.dempsey.teamworkapp.base.BaseActivity
 import com.dempsey.teamworkapp.presenter.login.LoginPresenter
 import com.dempsey.teamworkapp.presenter.project.ProjectsContract
+import com.dempsey.teamworkapp.presenter.task.TasksContract
 import com.dempsey.teamworkapp.utils.MessageBanner
 import com.dempsey.teamworkapp.utils.MessageType
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : LoginContract.View,
-    BaseActivity<LoginPresenter>(), ProjectsContract.Delegate {
+    BaseActivity<LoginPresenter>(), ProjectsContract.Delegate, TasksContract.Delegate {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,16 +34,16 @@ class MainActivity : LoginContract.View,
     return LoginPresenter.newInstance(this)
   }
 
-  override fun showProgress() {
+  override fun showLoading() {
     progress_bar.visibility = View.VISIBLE
   }
 
-  override fun hideProgress() {
-    progress_bar.visibility = View.INVISIBLE
+  override fun hideLoading() {
+    progress_bar.visibility = View.GONE
   }
 
-  override fun updateLoading(show: Boolean) {
-    if (show) showProgress() else hideProgress()
+  fun updateLoading(show: Boolean) {
+    if (show) showLoading() else hideLoading()
   }
 
   override fun showSuccess() {
@@ -47,11 +51,15 @@ class MainActivity : LoginContract.View,
   }
 
   override fun startTasksFragment(projectId: String) {
-    replaceFragment(TasksViewFragment.newInstance(projectId, this))
+    replaceFragment(TasksViewFragment.newInstance(projectId, delegate = this))
   }
 
   override fun startDetailFragment(project: Project) {
-    replaceFragment(ProjectDetailFragment.newInstance(project, this))
+    replaceFragment(ProjectDetailFragment.newInstance(project, delegate = this))
+  }
+
+  override fun startTodoListFragment(todoList: TodoList) {
+    replaceFragment(TodoListFragment.newInstance(todoList, delegate = this))
   }
 
   override fun showError(error: Int) {
@@ -61,6 +69,11 @@ class MainActivity : LoginContract.View,
   override fun onDestroy() {
     presenter.onViewDestroyed()
     super.onDestroy()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_main, menu)
+    return super.onCreateOptionsMenu(menu)
   }
 
   override fun onBackPressed() {

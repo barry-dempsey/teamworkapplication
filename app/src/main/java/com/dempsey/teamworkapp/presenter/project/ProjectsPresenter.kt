@@ -20,9 +20,7 @@ class ProjectsPresenter(
     override fun getProjects() {
         disposable = business.getProjects()
                 .subscribeOn(io)
-                .doOnSubscribe { view.showProgress() }
                 .observeOn(mainThread)
-                .doOnTerminate{ view.hideProgress() }
                 .subscribe(
                         { projects -> view.showProjectsForUser(projects) },
                         { error -> view.handleError(error)}

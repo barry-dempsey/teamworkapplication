@@ -21,7 +21,7 @@ class ProjectsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int
     ): ProjectViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(layout.project_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layout.fragment_project_item, parent, false)
         return ProjectViewHolder(view)
     }
 
@@ -33,16 +33,16 @@ class ProjectsAdapter(
     inner class ProjectViewHolder(view: View) : ViewHolder(view) {
 
         private var rootView = view.findViewById<LinearLayout>(R.id.item_view)
-        private var projectIdTv = view.findViewById(id.project_id) as TextView
+        private var projectDateTv = view.findViewById(id.project_date) as TextView
         private var projectNameTv = view.findViewById(id.project_name) as TextView
-        private var projectDescriptionTv = view.findViewById(id.project_description) as TextView
+        private var projectStatusTv = view.findViewById(id.project_description) as TextView
 
         fun bind(project: Project) {
             rootView.setOnClickListener { listener.onProjectSelectedForTasks(project) }
             rootView.setOnLongClickListener{ listener.onProjectSelectedForDetail(project) }
-            projectIdTv.text = project.id
+            projectDateTv.text = project.createdOn
             projectNameTv.text = project.name
-            projectDescriptionTv.text = project.description
+            projectStatusTv.text = project.status
         }
 
     }

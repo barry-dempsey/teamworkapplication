@@ -19,12 +19,12 @@ class LoginPresenter(
   override fun loginUser(apiKey: String) {
     disposable = Teamwork.accountRequest()
         .newAuthenticateRequest(apiKey)
-        .doOnSubscribe { view.showProgress() }
+        .doOnSubscribe { view.showLoading() }
         .subscribeOn(schedulers)
         .observeOn(androidSchedulers)
-        .doOnTerminate { view.hideProgress() }
+        .doOnTerminate { view.hideLoading() }
         .subscribe(
-            { _ ->  view.showSuccess()},
+            { view.showSuccess()},
             { error -> handleError(error)}
         )
   }
@@ -46,12 +46,11 @@ class LoginPresenter(
   }
 
   companion object {
-
+    @JvmStatic
     fun newInstance(view: LoginContract.View): LoginPresenter =
             LoginPresenter(
                     view,
                     Schedulers.io(),
                     AndroidSchedulers.mainThread())
-
   }
 }

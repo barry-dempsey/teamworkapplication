@@ -18,9 +18,7 @@ class ProjectDetailPresenter(
         Teamwork.projectRequest()
                 .updateProject(project)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe { view.showLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnTerminate{ view.hideLoading() }
                 .subscribe(
                         { view.showSuccess() },
                         { view.showError() }

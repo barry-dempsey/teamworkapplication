@@ -3,8 +3,6 @@ package com.dempsey.teamworkapp.view
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import com.dempsey.teamwork.data.model.Projects
 import com.dempsey.teamworkapp.presenter.project.ProjectsPresenter
@@ -19,6 +17,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class ProjectsFragment : BaseFragment<ProjectsPresenter>(
 ), ProjectsContract.View {
+    override fun showProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var delegate: ProjectsContract.Delegate
 
@@ -30,6 +35,20 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
         super.onCreate(savedInstanceState)
         presenter.onViewCreated()
         setHasOptionsMenu(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sort -> {
+                presenter.sortByDueData(projectList!!)
+                return true
+            }
+            R.id.refresh -> {
+                presenter.onViewCreated()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun setUpUi() {
@@ -47,14 +66,6 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
         }
     }
 
-    override fun showProgress() {
-        delegate.updateLoading(show = true)
-    }
-
-    override fun hideProgress() {
-        delegate.updateLoading(show = false)
-    }
-
     override fun showProjectsForUser(projects: Projects) {
         this.projectList = projects.projectList
         val adapter = ProjectsAdapter(projects.projectList, ProjectSelector())
@@ -69,25 +80,6 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
 
     override fun showLoadingMessage() {
         MessageBanner(context as MainActivity).showBanner(getString(R.string.loading_projects), MessageType.SUCCESS)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.sort -> {
-                presenter.sortByDueData(projectList!!)
-                return true
-            }
-            R.id.refresh -> {
-                presenter.onViewCreated()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
     }
 
     override fun instantiatePresenter(): ProjectsPresenter {
@@ -107,9 +99,10 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance(delegate: ProjectsContract.Delegate) = ProjectsFragment().apply {
+        fun newInstance(
+                delegate: ProjectsContract.Delegate
+        ) = ProjectsFragment().apply {
             this.delegate = delegate
         }
     }

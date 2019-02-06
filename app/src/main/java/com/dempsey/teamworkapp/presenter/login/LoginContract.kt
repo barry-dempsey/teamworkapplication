@@ -4,9 +4,9 @@ interface LoginContract {
 
   interface View {
 
-    fun showProgress()
+    fun showLoading()
 
-    fun hideProgress()
+    fun hideLoading()
 
     fun showSuccess()
 
@@ -19,5 +19,4 @@ interface LoginContract {
     fun loginUser(apiKey: String)
 
   }
-
 }

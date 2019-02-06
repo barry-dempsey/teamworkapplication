@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dempsey.teamworkapp.view.MainActivity
 
 abstract class BaseFragment<P: BasePresenter> : Fragment() {
 
@@ -22,6 +23,14 @@ abstract class BaseFragment<P: BasePresenter> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUi()
+    }
+
+    open fun showLoading() {
+        (activity as MainActivity).updateLoading(show = true)
+    }
+
+    open fun hideLoading() {
+        (activity as MainActivity).updateLoading(show = false)
     }
 
     abstract fun instantiatePresenter(): P

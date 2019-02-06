@@ -21,4 +21,11 @@
   <color name="green_text">#8dc63f</color>
   <color name="error_text_color">#c6523f</color>
   <color name="dim_gray">#666666</color>
+
+  <color name="offwhite_background">#FFF2F3F4</color>
+  <color name="text_dark">#4D0667D0</color>
+  <color name="button_active">#FF0667D0</color>
+  <color name="text_light">#FF1652F0</color>
+  <color name="status_bar_color">#FF202020</color>
+  <color name="empty_case_text">#FF8F949A</color>
 </resources>

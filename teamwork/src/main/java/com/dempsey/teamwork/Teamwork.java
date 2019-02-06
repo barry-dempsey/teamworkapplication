@@ -11,12 +11,11 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.CertificatePinner;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public final class Teamwork {
-    private static final String PREFERENCE_NAME = "com.nikoyuwono.teamwork.SDK_STORE";
+    private static final String PREFERENCE_NAME = "com.dempsey.teamwork.SDK_STORE";
     private static final String SHA_256_PREFIX = "sha256/";
     private static final String SSL_FINGERPRINT = "QSiElEKKeAgIBOJuy6Lg4dDUNqWNGCb4sQTHFSKd0co=";
     private static final String SSL_API_HOST = "*.teamwork.com";

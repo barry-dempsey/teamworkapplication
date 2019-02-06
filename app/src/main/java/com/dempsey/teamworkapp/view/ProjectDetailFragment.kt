@@ -10,14 +10,14 @@ import com.dempsey.teamworkapp.presenter.project.ProjectDetailContract
 import com.dempsey.teamworkapp.utils.MessageBanner
 import com.dempsey.teamworkapp.utils.MessageType
 import kotlinx.android.synthetic.main.fragment_detail.project_description
-import kotlinx.android.synthetic.main.fragment_detail.project_id
 import kotlinx.android.synthetic.main.fragment_detail.project_name
 import kotlinx.android.synthetic.main.fragment_detail.title_view
 import kotlinx.android.synthetic.main.fragment_detail.update_button
+import kotlinx.android.synthetic.main.fragment_project_item.*
 
-class ProjectDetailFragment :
-        BaseFragment<ProjectDetailPresenter>(),
-        ProjectDetailContract.View {
+class ProjectDetailFragment : BaseFragment<ProjectDetailPresenter>(
+
+), ProjectDetailContract.View {
 
     override fun layoutId(): Int = R.layout.fragment_detail
 
@@ -28,12 +28,13 @@ class ProjectDetailFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         project = arguments!![PROJECT_BUNDLE] as Project
+        hideLoading()
     }
 
     override fun setUpUi() {
         title_view.text = project.name
         project_name.setText(project.name)
-        project_id.setText(project.id)
+        project_date.text = project.createdOn
         project_description.setText(project.description)
         update_button.setOnClickListener { validateInputAndSend() }
     }
@@ -44,27 +45,23 @@ class ProjectDetailFragment :
 
     override fun instantiatePresenter() = ProjectDetailPresenter.newInstance(this)
 
-    override fun showLoading() {
-        delegate?.updateLoading(show = true)
-    }
-
-    override fun hideLoading() {
-        delegate?.updateLoading(show = false)
-    }
-
     override fun showSuccess() {
-        MessageBanner(context as MainActivity).showBanner("Success", MessageType.SUCCESS)
+        MessageBanner(context as MainActivity).showBanner(getString(R.string.success), MessageType.SUCCESS)
     }
 
     override fun showError() {
-        MessageBanner(context as MainActivity).showBanner("Error", MessageType.ERROR)
+        MessageBanner(context as MainActivity).showBanner(getString(R.string.error), MessageType.ERROR)
     }
 
     companion object {
 
         private const val PROJECT_BUNDLE = "projectExtra"
 
-        fun newInstance(project: Project, delegate: BaseDelegate) = ProjectDetailFragment().apply {
+        @JvmStatic
+        fun newInstance(
+                project: Project,
+                delegate: BaseDelegate
+        ) = ProjectDetailFragment().apply {
             arguments = Bundle().apply { putSerializable(PROJECT_BUNDLE, project) }
             this.delegate = delegate
         }

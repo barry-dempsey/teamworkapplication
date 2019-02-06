@@ -1,6 +1,7 @@
 package com.dempsey.teamwork.service.tasks;
 
 import com.dempsey.teamwork.data.model.ProjectTask;
+import com.dempsey.teamwork.data.model.TodoList;
 import com.dempsey.teamwork.data.net.ApiClient;
 import com.dempsey.teamwork.service.Util;
 import com.google.gson.Gson;
@@ -9,7 +10,8 @@ import io.reactivex.annotations.NonNull;
 
 public class TasksServiceImpl implements TasksService {
 
-    private static final String PROJECTS_WITH_ID_URL_PATH = "/projects/%s.json";
+    private static final String TASKS_WITH_ID_URL_PATH = "/projects/%s/tasklists.json";
+    private static final String SINGLE_TASK_LIST_PATH = "/tasklists/%s.json";
     private final ApiClient apiClient;
     private final Gson gson;
 
@@ -19,14 +21,26 @@ public class TasksServiceImpl implements TasksService {
     }
 
     @Override
-    public Observable<ProjectTask> getTasksForProject(String projectId) {
+    public Observable<ProjectTask> getTasksForProject(final String projectId) {
         return apiClient.withPath(projectsUrlPath(projectId))
                 .get()
                 .map(Util::getContent)
                 .map(content -> gson.fromJson(content, ProjectTask.class));
     }
 
+    @Override
+    public Observable<TodoList> getTodoListForTask(final String id) {
+        return apiClient.withPath(todoListUrlPath(id))
+                .get()
+                .map(Util::getContent)
+                .map(content -> gson.fromJson(content, TodoList.class));
+    }
+
     private String projectsUrlPath(@NonNull String projectId) {
-        return String.format(PROJECTS_WITH_ID_URL_PATH, projectId);
+        return String.format(TASKS_WITH_ID_URL_PATH, projectId);
+    }
+
+    private String todoListUrlPath(@NonNull String taskId) {
+        return String.format(SINGLE_TASK_LIST_PATH, taskId);
     }
 }
