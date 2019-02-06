@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -41,4 +43,6 @@ dependencies {
     implementation project(':teamwork')
     implementation Deps.design
     implementation Deps.mockito
+    api Deps.room
+    kapt Deps.roomCompiler
 }

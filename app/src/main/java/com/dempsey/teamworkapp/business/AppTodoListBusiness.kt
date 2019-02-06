@@ -1,8 +1,8 @@
 package com.dempsey.teamworkapp.business
 
 import com.dempsey.teamwork.data.model.TodoList
-import com.dempsey.teamworkapp.dao.AppRemoteDao
-import com.dempsey.teamworkapp.dao.RemoteDao
+import com.dempsey.teamworkapp.dao.remote.AppRemoteDao
+import com.dempsey.teamworkapp.dao.remote.RemoteDao
 import io.reactivex.Observable
 
 class AppTodoListBusiness(

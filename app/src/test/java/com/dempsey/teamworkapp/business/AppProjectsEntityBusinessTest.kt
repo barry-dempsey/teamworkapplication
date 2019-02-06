@@ -4,7 +4,7 @@ import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamwork.data.model.Projects
 import com.dempsey.teamwork.data.model.TodoList
 import com.dempsey.teamwork.service.project.ProjectRequest
-import com.dempsey.teamworkapp.dao.RemoteDao
+import com.dempsey.teamworkapp.dao.remote.RemoteDao
 import io.reactivex.Observable
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -16,7 +16,7 @@ import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class AppProjectsBusinessTest {
+class AppProjectsEntityBusinessTest {
 
     private lateinit var projectsBusiness: AppProjectsBusiness
 

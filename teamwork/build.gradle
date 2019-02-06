@@ -38,6 +38,8 @@ dependencies {
   implementation Deps.retrofitGsonConverter
   testImplementation Deps.junit
   implementation Deps.rxJava1
+  api Deps.room
+  kapt Deps.roomCompiler
   implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 }
 repositories {

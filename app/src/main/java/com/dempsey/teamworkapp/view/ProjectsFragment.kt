@@ -83,7 +83,7 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
     }
 
     override fun instantiatePresenter(): ProjectsPresenter {
-        return ProjectsPresenter.newInstance(this)
+        return ProjectsPresenter.newInstance(this, context!!)
     }
 
     inner class ProjectSelector : ProjectsAdapter.ProjectSelected {

@@ -1,4 +1,4 @@
-package com.dempsey.teamworkapp.dao
+package com.dempsey.teamworkapp.dao.remote
 
 import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamwork.data.model.Projects

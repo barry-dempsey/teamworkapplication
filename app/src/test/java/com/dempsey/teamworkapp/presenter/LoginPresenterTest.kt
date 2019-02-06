@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Test
 
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -43,6 +44,7 @@ class LoginPresenterTest {
   fun `log in the user`() {
     val client = OkHttpClient.Builder().build()
     Mockito.`when`(okHttpClientBuilder.build()).thenReturn(client)
+    Mockito.`when`(apiClient.withPath(anyString())).thenReturn(mockApiClient().withPath(""))
     Mockito.doReturn(Observable.just(mockAccount())).`when`(accountRequest).newAuthenticateRequest("apiKey")
     presenter.loginUser("apiKey")
     testScheduler.triggerActions()

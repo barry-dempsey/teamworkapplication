@@ -8,6 +8,8 @@ interface ProjectsBusiness {
 
     fun getProjects(): Observable<Projects>
 
+    fun storeProjects(projects: Projects)
+
     fun filterByDueDate(projects: List<Project>): List<Project>
 
 }

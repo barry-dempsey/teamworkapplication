@@ -1,6 +1,8 @@
 package com.dempsey.teamworkapp.presenter.project
 
+import android.content.Context
 import com.dempsey.teamwork.data.model.Project
+import com.dempsey.teamwork.data.model.Projects
 import com.dempsey.teamworkapp.business.AppProjectsBusiness
 import com.dempsey.teamworkapp.base.BasePresenter
 import io.reactivex.Scheduler
@@ -22,9 +24,14 @@ class ProjectsPresenter(
                 .subscribeOn(io)
                 .observeOn(mainThread)
                 .subscribe(
-                        { projects -> view.showProjectsForUser(projects) },
+                        { projects -> handleProjectsResponse(projects) },
                         { error -> view.handleError(error)}
                 )
+    }
+
+    private fun handleProjectsResponse(projects: Projects) {
+        business.storeProjects(projects)
+        view.showProjectsForUser(projects)
     }
 
     override fun onViewCreated() {
@@ -41,9 +48,12 @@ class ProjectsPresenter(
 
     companion object {
 
-        fun newInstance(view: ProjectsContract.View): ProjectsPresenter =
+        fun newInstance(
+                view: ProjectsContract.View,
+                context: Context
+        ): ProjectsPresenter =
                 ProjectsPresenter(
-                        AppProjectsBusiness.newInstance(),
+                        AppProjectsBusiness.newInstance(context),
                         Schedulers.io(),
                         AndroidSchedulers.mainThread(),
                         view)
