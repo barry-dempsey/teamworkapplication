@@ -55,7 +55,7 @@ class MainActivity : LoginContract.View,
   }
 
   override fun startDetailFragment(project: Project) {
-    replaceFragment(ProjectDetailFragment.newInstance(project, delegate = this))
+    replaceFragment(ProjectDetailFragment.newInstance(project))
   }
 
   override fun startTodoListFragment(todoList: TodoList) {

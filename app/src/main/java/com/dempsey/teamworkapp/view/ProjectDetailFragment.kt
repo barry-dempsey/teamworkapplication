@@ -3,7 +3,6 @@ package com.dempsey.teamworkapp.view
 import android.os.Bundle
 import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamworkapp.R
-import com.dempsey.teamworkapp.base.BaseDelegate
 import com.dempsey.teamworkapp.presenter.project.ProjectDetailPresenter
 import com.dempsey.teamworkapp.base.BaseFragment
 import com.dempsey.teamworkapp.presenter.project.ProjectDetailContract
@@ -23,8 +22,6 @@ class ProjectDetailFragment : BaseFragment<ProjectDetailPresenter>(
     override fun layoutId(): Int = R.layout.fragment_detail
 
     private lateinit var project: Project
-
-    private var delegate: BaseDelegate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +57,9 @@ class ProjectDetailFragment : BaseFragment<ProjectDetailPresenter>(
 
         @JvmStatic
         fun newInstance(
-                project: Project,
-                delegate: BaseDelegate
+                project: Project
         ) = ProjectDetailFragment().apply {
             arguments = Bundle().apply { putSerializable(PROJECT_BUNDLE, project) }
-            this.delegate = delegate
         }
     }
 }

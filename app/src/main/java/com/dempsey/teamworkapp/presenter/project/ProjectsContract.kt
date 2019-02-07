@@ -2,7 +2,6 @@ package com.dempsey.teamworkapp.presenter.project
 
 import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamwork.data.model.Projects
-import com.dempsey.teamworkapp.base.BaseDelegate
 
 interface ProjectsContract {
 
@@ -30,7 +29,7 @@ interface ProjectsContract {
 
     }
 
-    interface Delegate: BaseDelegate {
+    interface Delegate {
 
         fun startTasksFragment(projectId: String)
 

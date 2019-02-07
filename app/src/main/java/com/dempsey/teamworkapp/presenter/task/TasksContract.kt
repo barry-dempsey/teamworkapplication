@@ -2,7 +2,6 @@ package com.dempsey.teamworkapp.presenter.task
 
 import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamwork.data.model.TodoList
-import com.dempsey.teamworkapp.base.BaseDelegate
 
 interface TasksContract {
 
@@ -28,7 +27,7 @@ interface TasksContract {
 
     }
 
-    interface Delegate : BaseDelegate {
+    interface Delegate {
 
         fun startTodoListFragment(todoList: TodoList)
 
