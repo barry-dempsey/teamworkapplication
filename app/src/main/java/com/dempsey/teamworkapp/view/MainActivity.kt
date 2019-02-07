@@ -23,7 +23,7 @@ class MainActivity : LoginContract.View,
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
-    doLogin()
+    isConnectedOrConnecting { doLogin() }
   }
 
   private fun doLogin() {
@@ -74,6 +74,13 @@ class MainActivity : LoginContract.View,
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
     return super.onCreateOptionsMenu(menu)
+  }
+
+  fun isConnectedOrConnecting(f: ()-> Unit) {
+    val activeNetworkInfo = connectivityManager().activeNetworkInfo
+    if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting) {
+      f()
+    }
   }
 
   override fun onBackPressed() {

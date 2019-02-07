@@ -2,7 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/task_title"
-    style="@style/Teamwork.Title"
+    style="@style/Teamwork.SubTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"

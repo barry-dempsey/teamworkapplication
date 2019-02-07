@@ -8,6 +8,13 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="CustomToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="colorButtonNormal">@color/colorPrimary</item>
+    <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+    <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+    <item name="android:actionMenuTextColor">@color/seashell_white</item>
+  </style>
+
   <style name="Teamwork"/>
 
   <style name="Teamwork.Title">

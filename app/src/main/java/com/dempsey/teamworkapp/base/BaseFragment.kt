@@ -33,6 +33,9 @@ abstract class BaseFragment<P: BasePresenter> : Fragment() {
         (activity as MainActivity).updateLoading(show = false)
     }
 
+    open fun checkForNetworkThenCall(func: ()-> Unit) =
+            (context as MainActivity).isConnectedOrConnecting { func }
+
     abstract fun instantiatePresenter(): P
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

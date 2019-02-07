@@ -17,13 +17,6 @@ abstract class BaseActivity<P: BasePresenter>: AppCompatActivity() {
     presenter = instantiatePresenter()
   }
 
-  fun isConnectedOrConnecting(f: ()-> Unit) {
-    val activeNetworkInfo = connectivityManager().activeNetworkInfo
-    if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting) {
-      f()
-    }
-  }
-
   protected fun addFragment(fragment: Fragment) {
     supportFragmentManager.inTransaction { add(R.id.fragment_content, fragment) }
   }
@@ -34,7 +27,7 @@ abstract class BaseActivity<P: BasePresenter>: AppCompatActivity() {
 
   abstract fun instantiatePresenter(): P
 
-  private fun connectivityManager() = getSystemService(
+  protected fun connectivityManager() = getSystemService(
       Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
 

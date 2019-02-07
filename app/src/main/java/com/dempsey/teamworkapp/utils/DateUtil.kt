@@ -7,6 +7,14 @@ import java.util.*
 
 object DateUtil {
 
+    fun getPrettyDateFromStamp(timestamp: String): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        sdf.timeZone = TimeZone.getTimeZone("GMT")
+        val date = sdf.parse(timestamp)
+        val expectedFormat = SimpleDateFormat("MMM yyyy", Locale.US)
+        return expectedFormat.format(date)
+    }
+
     fun getSimpleTransactionDate(timestamp: String): String {
         val date = Date(Long.parseLong(timestamp) * 1000L)
         val expectedFormat = SimpleDateFormat("MMM yyyy", Locale.US)

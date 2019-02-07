@@ -32,6 +32,7 @@ class TasksViewFragment : BaseFragment<TasksPresenter>(), TasksContract.View {
     override fun setUpUi() {}
 
     override fun displayProjectTasks(tasks: ProjectTask) {
+        task_title.text = tasks.tasks[0].projectName
         val taskAdapter = TasksAdapter(tasks.tasks, TaskSelector())
         tasks_recycler_view.adapter = taskAdapter
         tasks_recycler_view.layoutManager = LinearLayoutManager(context!!)

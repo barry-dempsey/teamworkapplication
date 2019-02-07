@@ -7,6 +7,7 @@ import com.dempsey.teamworkapp.base.BaseDelegate
 import com.dempsey.teamworkapp.presenter.project.ProjectDetailPresenter
 import com.dempsey.teamworkapp.base.BaseFragment
 import com.dempsey.teamworkapp.presenter.project.ProjectDetailContract
+import com.dempsey.teamworkapp.utils.DateUtil
 import com.dempsey.teamworkapp.utils.MessageBanner
 import com.dempsey.teamworkapp.utils.MessageType
 import kotlinx.android.synthetic.main.fragment_detail.project_description
@@ -34,7 +35,7 @@ class ProjectDetailFragment : BaseFragment<ProjectDetailPresenter>(
     override fun setUpUi() {
         title_view.text = project.name
         project_name.setText(project.name)
-        project_date.text = project.createdOn
+        project_date.text = DateUtil.getPrettyDateFromStamp(project.createdOn)
         project_description.setText(project.description)
         update_button.setOnClickListener { validateInputAndSend() }
     }

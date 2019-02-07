@@ -11,6 +11,7 @@ import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamworkapp.R
 import com.dempsey.teamworkapp.R.id
 import com.dempsey.teamworkapp.R.layout
+import com.dempsey.teamworkapp.utils.DateUtil
 import com.dempsey.teamworkapp.view.ProjectsFragment.ProjectSelector
 import com.dempsey.teamworkapp.view.ProjectsAdapter.ProjectViewHolder
 
@@ -40,7 +41,7 @@ class ProjectsAdapter(
         fun bind(project: Project) {
             rootView.setOnClickListener { listener.onProjectSelectedForTasks(project) }
             rootView.setOnLongClickListener{ listener.onProjectSelectedForDetail(project) }
-            projectDateTv.text = project.createdOn
+            projectDateTv.text = DateUtil.getPrettyDateFromStamp(project.createdOn)
             projectNameTv.text = project.name
             projectStatusTv.text = project.status
         }

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="3dp"
     android:layout_marginStart="3dp"
-    android:layout_marginBottom="3dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginBottom="4dp"
     android:elevation="3dp"
     android:orientation="horizontal"
     android:padding="@dimen/activity_vertical_margin"
@@ -27,14 +28,17 @@
       style="@style/Teamwork.Title"
       android:layout_weight="1.5"
       android:layout_width="0dp"
-      tools:text="Sample project"
+      android:maxLines="2"
+      android:ellipsize="end"
+      tools:text="Sample project for building new Android application"
       />
 
   <TextView
       android:id="@+id/project_description"
-      style="@style/Teamwork.SubTitle"
+      style="@style/Teamwork.Footer"
       android:layout_weight="0.75"
       android:layout_width="0dp"
+      android:gravity="end"
       tools:text="In Progress!"
       />
 
