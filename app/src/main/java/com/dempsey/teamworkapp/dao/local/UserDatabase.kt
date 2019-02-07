@@ -27,7 +27,7 @@ object DataBaseProvider {
                     context.applicationContext,
                     UserDatabase::class.java,
                     DATABASE_NAME
-            ).allowMainThreadQueries().build()
+            ).build()
         }
 
         return mInstance!!

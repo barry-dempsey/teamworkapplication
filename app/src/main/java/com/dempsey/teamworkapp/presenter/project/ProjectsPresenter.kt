@@ -3,8 +3,10 @@ package com.dempsey.teamworkapp.presenter.project
 import android.content.Context
 import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamwork.data.model.Projects
+import com.dempsey.teamworkapp.R
 import com.dempsey.teamworkapp.business.AppProjectsBusiness
 import com.dempsey.teamworkapp.base.BasePresenter
+import com.dempsey.teamworkapp.performOperationOnThread
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -25,13 +27,21 @@ class ProjectsPresenter(
                 .observeOn(mainThread)
                 .subscribe(
                         { projects -> handleProjectsResponse(projects) },
-                        { error -> view.handleError(error)}
+                        { error -> handleError(error)}
                 )
     }
 
+    private fun handleError(error: Throwable) {
+        view.handleError(error)
+    }
+
     private fun handleProjectsResponse(projects: Projects) {
-        business.storeProjects(projects)
+        performOperationOnThread(
+                longOperation = { business.storeProjects(projects) },
+                callback = { view.showLoadingMessage(R.string.saved_latest_projects) }
+        )
         view.showProjectsForUser(projects)
+        view.showLoadingMessage(R.string.loading_projects)
     }
 
     override fun onViewCreated() {

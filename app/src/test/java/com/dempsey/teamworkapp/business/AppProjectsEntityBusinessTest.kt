@@ -4,6 +4,7 @@ import com.dempsey.teamwork.data.model.ProjectTask
 import com.dempsey.teamwork.data.model.Projects
 import com.dempsey.teamwork.data.model.TodoList
 import com.dempsey.teamwork.service.project.ProjectRequest
+import com.dempsey.teamworkapp.dao.local.UserDatabase
 import com.dempsey.teamworkapp.dao.remote.RemoteDao
 import io.reactivex.Observable
 import junit.framework.Assert.assertNotNull
@@ -26,11 +27,11 @@ class AppProjectsEntityBusinessTest {
 
     @Mock private lateinit var remoteDao: RemoteDao
 
-    @Mock private lateinit var projectRequest: ProjectRequest
+    @Mock private lateinit var database: UserDatabase
 
     @Before
     fun `set up`() {
-        projectsBusiness = AppProjectsBusiness(remoteDao)
+        projectsBusiness = AppProjectsBusiness(remoteDao, database)
         taskBusiness = AppTaskBusiness(remoteDao)
         todoBusiness = AppTodoListBusiness(remoteDao)
     }

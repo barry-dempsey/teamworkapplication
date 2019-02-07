@@ -17,13 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class ProjectsFragment : BaseFragment<ProjectsPresenter>(
 ), ProjectsContract.View {
-    override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private lateinit var delegate: ProjectsContract.Delegate
 
@@ -78,12 +71,20 @@ class ProjectsFragment : BaseFragment<ProjectsPresenter>(
         MessageBanner(context as MainActivity).showBanner(error.message!!, MessageType.ERROR)
     }
 
-    override fun showLoadingMessage() {
-        MessageBanner(context as MainActivity).showBanner(getString(R.string.loading_projects), MessageType.SUCCESS)
+    override fun showLoadingMessage(message: Int) {
+        MessageBanner(context as MainActivity).showBanner(message, MessageType.SUCCESS)
     }
 
     override fun instantiatePresenter(): ProjectsPresenter {
         return ProjectsPresenter.newInstance(this, context!!)
+    }
+
+    override fun showProgress() {
+        showLoading()
+    }
+
+    override fun hideProgress() {
+        hideLoading()
     }
 
     inner class ProjectSelector : ProjectsAdapter.ProjectSelected {

@@ -6,6 +6,7 @@
   <string name="sort_label">Sort</string>
   <string name="refresh_label">Refresh</string>
   <string name="loading_projects">Loading Projects</string>
+  <string name="saved_latest_projects">Saved latest data</string>
   <string name="success">Success</string>
   <string name="error">Error</string>
 </resources>

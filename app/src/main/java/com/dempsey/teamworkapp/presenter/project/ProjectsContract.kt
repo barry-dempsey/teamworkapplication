@@ -12,7 +12,7 @@ interface ProjectsContract {
 
         fun hideProgress()
 
-        fun showLoadingMessage()
+        fun showLoadingMessage(message: Int)
 
         fun showProjectsForUser(projects: Projects)
 
