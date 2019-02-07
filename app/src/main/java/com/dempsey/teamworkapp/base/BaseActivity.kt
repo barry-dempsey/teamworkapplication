@@ -1,5 +1,6 @@
 package com.dempsey.teamworkapp.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -12,8 +13,11 @@ abstract class BaseActivity<P: BasePresenter>: AppCompatActivity() {
 
   protected lateinit var presenter: P
 
+  @SuppressLint("RestrictedApi")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    supportActionBar?.setHomeButtonEnabled(true)
+    supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
     presenter = instantiatePresenter()
   }
 
@@ -29,6 +33,4 @@ abstract class BaseActivity<P: BasePresenter>: AppCompatActivity() {
 
   protected fun connectivityManager() = getSystemService(
       Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-
 }

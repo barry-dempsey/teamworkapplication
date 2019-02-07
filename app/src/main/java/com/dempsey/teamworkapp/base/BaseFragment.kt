@@ -26,11 +26,11 @@ abstract class BaseFragment<P: BasePresenter> : Fragment() {
     }
 
     open fun showLoading() {
-        (activity as MainActivity).updateLoading(show = true)
+        activity ?: (activity as MainActivity).updateLoading(show = true)
     }
 
     open fun hideLoading() {
-        (activity as MainActivity).updateLoading(show = false)
+        activity ?: (activity as MainActivity).updateLoading(show = false)
     }
 
     open fun checkForNetworkThenCall(func: ()-> Unit) =
