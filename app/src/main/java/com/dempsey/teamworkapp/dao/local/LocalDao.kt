@@ -10,8 +10,8 @@ import com.dempsey.teamworkapp.data.ProjectEntity
 interface LocalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveProjects(projectEntity: ProjectEntity)
+    fun saveAllProjects(projectEntities: List<ProjectEntity>)
 
     @Query("SELECT * FROM project")
-    fun getProjectsFromCache(): ProjectEntity
+    fun getProjectsFromCache(): List<ProjectEntity>
 }

@@ -10,7 +10,7 @@ interface ProjectsBusiness {
 
     fun storeProjects(projects: Projects)
 
-    fun getProjectsFromCache(): List<Project>
+    fun getProjectsFromCache(): Projects
 
     fun filterByDueDate(projects: List<Project>): List<Project>
 

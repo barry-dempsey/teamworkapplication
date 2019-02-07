@@ -18,22 +18,29 @@ class AppProjectsBusiness(
     override fun getProjects(): Observable<Projects> = remoteDao.getAllProjects()
 
     override fun storeProjects(projects: Projects) {
-        database.localDao().saveProjects(prepareDataForCache(projects))
+        database.localDao().saveAllProjects(prepareDataForCache(projects))
     }
 
-    override fun getProjectsFromCache(): List<Project> {
-        val project = database.localDao().getProjectsFromCache()
-        val projectToDisplay = Project.newBuilder().apply{
-            this.id(project.id)
-            this.name(project.name)
-            this.description(project.description)
-            this.createdOn(project.createdOn)
-            this.lastChangedOn(project.lastChangedOn)
-        }.build()
-        return arrayListOf(projectToDisplay)
+    override fun getProjectsFromCache(): Projects {
+        val projectEntities = database.localDao().getProjectsFromCache()
+        val projects = ArrayList<Project>()
+        for (projectEntity in projectEntities) {
+            Project.newBuilder().apply {
+                this.id(projectEntity.id)
+                this.name(projectEntity.name)
+                this.description(projectEntity.description)
+                this.createdOn(projectEntity.createdOn)
+                this.showAnnouncement(projectEntity.showAnnouncement)
+                projects.add(this.build())
+            }
+        }
+        return Projects().apply {
+            this.projectList = projects
+        }
     }
 
-    private fun prepareDataForCache(projects: Projects): ProjectEntity {
+    private fun prepareDataForCache(projects: Projects): List<ProjectEntity> {
+        val projectEntities = ArrayList<ProjectEntity>()
         for (project in projects.projectList) {
             val projectEntity = ProjectEntity(
                     project.id,
@@ -43,9 +50,9 @@ class AppProjectsBusiness(
                     project.isShowAnnouncement,
                     project.createdOn
             )
-            return projectEntity
+            projectEntities.add(projectEntity)
         }
-        return ProjectEntity("")
+        return projectEntities
     }
 
     override fun filterByDueDate(projects: List<Project>): List<Project> {
