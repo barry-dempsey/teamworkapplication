@@ -1,5 +1,7 @@
 package com.dempsey.teamworkapp.presenter.login
 
+import com.dempsey.teamwork.data.model.Account
+
 interface LoginContract {
 
   interface View {
@@ -8,7 +10,7 @@ interface LoginContract {
 
     fun hideLoading()
 
-    fun showSuccess()
+    fun showSuccess(account: Account)
 
     fun showError(error: Int)
 

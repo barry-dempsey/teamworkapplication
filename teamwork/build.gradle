@@ -41,6 +41,7 @@ dependencies {
   api Deps.room
   kapt Deps.roomCompiler
   implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
   mavenCentral()

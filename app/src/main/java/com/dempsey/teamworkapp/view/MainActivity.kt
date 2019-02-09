@@ -3,6 +3,7 @@ package com.dempsey.teamworkapp.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import com.dempsey.teamwork.data.model.Account
 import com.dempsey.teamwork.data.model.Project
 import com.dempsey.teamwork.data.model.TodoList
 import com.dempsey.teamworkapp.R
@@ -46,7 +47,7 @@ class MainActivity : LoginContract.View,
     if (show) showLoading() else hideLoading()
   }
 
-  override fun showSuccess() {
+  override fun showSuccess(account: Account) {
     addFragment(ProjectsFragment.newInstance(this))
   }
 

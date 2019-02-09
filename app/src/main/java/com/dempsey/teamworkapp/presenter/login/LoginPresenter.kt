@@ -24,7 +24,7 @@ class LoginPresenter(
         .observeOn(androidSchedulers)
         .doOnTerminate { view.hideLoading() }
         .subscribe(
-            { view.showSuccess()},
+            { account -> view.showSuccess(account)},
             { error -> handleError(error)}
         )
   }
